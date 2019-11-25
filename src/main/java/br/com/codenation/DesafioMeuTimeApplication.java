@@ -158,20 +158,6 @@ public class DesafioMeuTimeApplication implements MeuTimeInterface {
 		return TimesId();
 	}
 
-	@Desafio("buscarCorCamisaTimeDeFora")
-	public String buscarCorCamisaTimeDeFora(Long timeDaCasa, Long timeDeFora) {
-		if (!TimesId().contains(timeDaCasa) || !TimesId().contains(timeDeFora)) {
-			throw new TimeNaoEncontradoException();
-		}
-		Time mandante = buscaTimePeloId(timeDaCasa);
-		Time visitante = buscaTimePeloId(timeDeFora);
-		if (mandante.getCorUniformePrincipal().equals(visitante.getCorUniformePrincipal())) {
-			return visitante.getCorUniformeSecundario();
-		} else {
-			return visitante.getCorUniformePrincipal();
-		}
-	}
-
 	@Desafio("buscarMelhorJogadorDoTime")
 	public Long buscarMelhorJogadorDoTime(Long idTime) {
 		if (!TimesId().contains(idTime)) {
@@ -233,6 +219,20 @@ public class DesafioMeuTimeApplication implements MeuTimeInterface {
 			topJogadores.add(jogadores.get(i).getId());
 		}
 		return topJogadores;
+	}
+	
+	@Desafio("buscarCorCamisaTimeDeFora")
+	public String buscarCorCamisaTimeDeFora(Long timeDaCasa, Long timeDeFora) {
+		if (!TimesId().contains(timeDaCasa) || !TimesId().contains(timeDeFora)) {
+			throw new TimeNaoEncontradoException();
+		}
+		Time mandante = buscaTimePeloId(timeDaCasa);
+		Time visitante = buscaTimePeloId(timeDeFora);
+		if (mandante.getCorUniformePrincipal().equals(visitante.getCorUniformePrincipal())) {
+			return visitante.getCorUniformeSecundario();
+		} else {
+			return visitante.getCorUniformePrincipal();
+		}
 	}
 
 }
